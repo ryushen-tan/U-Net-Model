@@ -53,8 +53,8 @@ class UNET(nn.Module):
             self.ups.append(DoubleConv(feature*2, feature))
 
             # Maps 512 to 256 channels
-            self.bottle_neck = DoubleConv(features[-1], features[-1]*2)
-            self.final_conv = nn.Conv2d(features[0], out_channels, kernel_size=1)
+        self.bottle_neck = DoubleConv(features[-1], features[-1]*2)
+        self.final_conv = nn.Conv2d(features[0], out_channels, kernel_size=1)
 
     # Forward Pass
     def forward(self, x):
