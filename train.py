@@ -99,12 +99,17 @@ def main():
 
 
     scaler = torch.amp.GradScaler()
+    if LOAD_MODEL:
+        load_checkpoint(torch.load("my_checkpoint.pth.tar"), model, optimizer)
+
+    scalar = torch.amp.GradScaler()
+
     for epoch in range(NUM_EPOCHS):
         train_fn(train_loader, model, optimizer, loss_fn, scaler)
 
         # save model
         checkpoint = {
-            state_dict: model.state_dict(),
+            "state_dict": model.state_dict(),
             "optimizer": optimizer.state_dict(),
         }
         save_checkpoint(checkpoint)
